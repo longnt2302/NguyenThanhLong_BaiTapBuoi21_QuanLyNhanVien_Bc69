@@ -7,10 +7,22 @@ function getDataLocalStorage() {
     arrStaffs = convertDatas;
     renderData();
   } else {
-    localStorage.setItem("staffs","[]");
+    localStorage.setItem("staffs", "[]");
   }
 }
 getDataLocalStorage();
+
+// toastify
+function showMess(mess) {
+  Toastify({
+    text: mess,
+    duration: 3000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+  }).showToast();
+}
 
 // get data form
 function getDataForm() {
@@ -129,6 +141,7 @@ document.getElementById("btnThemNV").onclick = () => {
     document.getElementById("formStaff").reset();
     elError.innerHTML = "";
     elError.style.display = "none";
+    showMess("Thêm nhân viên thành công");
     return true;
   } else {
     elError.innerHTML = "Tài khoản nhân viên đã tồn tại";
@@ -142,6 +155,7 @@ const deleteNhanVien = (tknv) => {
   arrStaffs.splice(staff, 1);
   addData();
   renderData();
+  showMess("Xoá nhân viên thành công");
 };
 
 const editNhanVien = (tknv) => {
@@ -164,7 +178,7 @@ document.getElementById("btnThem").onclick = () => {
   document.getElementById("btnThemNV").removeAttribute("disabled");
   document.getElementById("btnCapNhat").setAttribute("disabled", "disabled");
   document.querySelector("#formStaff .form-group .sp-thongbao").innerHTML = "";
-  document.querySelector("#formStaff .form-group .sp-thongbao").style.display = 'none';
+  document.querySelector("#formStaff .form-group .sp-thongbao").style.display = "none";
 };
 
 document.getElementById("btnCapNhat").onclick = () => {
@@ -174,6 +188,7 @@ document.getElementById("btnCapNhat").onclick = () => {
     arrStaffs[staffUpdate] = datas;
     renderData();
     addData();
+    showMess("Cập nhật nhân viên thành công");
   }
 };
 
